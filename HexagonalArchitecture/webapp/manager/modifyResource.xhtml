@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Modify resource</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p/>
+        Title<h:inputText id="title" type="text" value="#{modifyResourceControllerRest.resource.title}" required="true"
+                          requiredMessage="Enter a title" size="30">
+    </h:inputText>
+        <h:message for="title" style="color:red"/>
+        <p/>
+        <h:selectOneMenu id="categories" value="#{modifyResourceControllerRest.resource.category}" required="true"
+                         requiredMessage="Select a category">Category
+            <f:selectItem itemValue="#{null}" itemLabel="Select" noSelectionOption="true"/>
+            <f:selectItem itemValue="Action" itemLabel="Action"/>
+            <f:selectItem itemValue="Adventure" itemLabel="Adventure"/>
+            <f:selectItem itemValue="Fantasy" itemLabel="Fantasy"/>
+            <f:selectItem itemValue="History" itemLabel="History"/>
+            <f:selectItem itemValue="Thriller" itemLabel="Thriller"/>
+            <f:selectItem itemValue="Philosophical" itemLabel="Philosophical"/>
+            <f:selectItem itemValue="Lifestyle" itemLabel="Lifestyle"/>
+            <f:selectItem itemValue="Entertainment" itemLabel="Entertainment"/>
+        </h:selectOneMenu>
+        <h:message for="categories" style="color:red"/>
+        <p/>
+        <h:panelGroup rendered="#{modifyResourceControllerRest.isBook()}">
+            <p/>
+            Release year<h:inputText id="releaseYear" value="#{modifyResourceControllerRest.resource.releaseYear}" required="true"
+                                     requiredMessage="Enter a release year" size="30"/>
+            <h:message for="releaseYear" style="color:red"/>
+            <p/>
+            Author<h:inputText id="author" type="text" value="#{modifyResourceControllerRest.resource.author}" required="true"
+                               requiredMessage="Enter an author" size="30"/>
+            <h:message for="author" style="color:red"/>
+            <p/>
+        </h:panelGroup>
+        <p/>
+        <h:panelGroup rendered="#{modifyResourceControllerRest.isNewspaper()}">
+            <p/>
+            Issue number<h:inputText id="issueNumber" value="#{modifyResourceControllerRest.resource.issueNumber}" required="true"
+                                     requiredMessage="Enter an issue number" size="30"/>
+            <h:message for="issueNumber" style="color:red"/>
+            <p/>
+        </h:panelGroup>
+        <p/>
+        <input type="reset" value="Clear"/>
+        <p/>
+        <h:commandButton value="Modify" action="#{modifyResourceControllerRest.onFinish()}"/>
+    </h:form>
+    <h:button value="Back" outcome="resourceList.xhtml"/>
+</h:body>
+</html>
+
+
