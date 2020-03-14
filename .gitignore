@@ -25,3 +25,9 @@ hs_err_pid*
 .\HexagonalArchitecture\.idea\
 .\HexagonalArchitecture\*.iml
 .\HexagonalArchitecture\ApplicationCore\*.iml
+
+HexagonalArchitecture/.idea/libraries/
+
+HexagonalArchitecture/.idea/
+
+*.iml
