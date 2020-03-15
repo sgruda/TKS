@@ -4,6 +4,9 @@ import pl.lodz.p.pas.Library.model.Book;
 import pl.lodz.p.pas.Library.model.Category;
 import pl.lodz.p.pas.Library.model.Newspaper;
 import pl.lodz.p.pas.Library.services.ResourceService;
+import pl.lodz.p.tks.model.BookEnt;
+import pl.lodz.p.tks.model.CategoryEnt;
+import pl.lodz.p.tks.model.NewspaperEnt;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Conversation;
@@ -24,7 +27,7 @@ public class AddResourceController implements Serializable {
 
     private String resourceType;
     private String title;
-    private Category category;
+    private CategoryEnt category;
     private Integer releaseYear;        //Book
     private String author;              //Book
     private Integer issueNumber;        //Newspaper
@@ -34,10 +37,10 @@ public class AddResourceController implements Serializable {
     }
     public String onFinish() {
         if (resourceType.equals("Book")) {
-            resourceService.addResource(new Book(title, category, releaseYear, author));
+            resourceService.addResource(new BookEnt(title, category, releaseYear, author));
         }
         if(resourceType.equals("Newspaper")) {
-            resourceService.addResource(new Newspaper(title, category, issueNumber));
+            resourceService.addResource(new NewspaperEnt(title, category, issueNumber));
         }
         clear();
         return "";
@@ -66,11 +69,11 @@ public class AddResourceController implements Serializable {
         this.title = title;
     }
 
-    public Category getCategory() {
+    public CategoryEnt getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryEnt category) {
         this.category = category;
     }
 

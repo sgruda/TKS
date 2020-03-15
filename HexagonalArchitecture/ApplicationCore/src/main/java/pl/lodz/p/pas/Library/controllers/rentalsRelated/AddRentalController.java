@@ -8,6 +8,10 @@ import pl.lodz.p.pas.Library.security.InMemoryIdentityPool;
 import pl.lodz.p.pas.Library.services.RentalService;
 import pl.lodz.p.pas.Library.services.ResourceService;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.RentalEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -24,43 +28,43 @@ import java.util.logging.Logger;
 @SessionScoped
 @Named
 public class AddRentalController implements Serializable {
-    public List<Rental> getRentalList() {
+    public List<RentalEnt> getRentalList() {
         return rentalList;
     }
 
-    public void setRentalList(List<Rental> rentalList) {
+    public void setRentalList(List<RentalEnt> rentalList) {
         this.rentalList = rentalList;
     }
 
-    public List<Resource> getResourceList() {
+    public List<ResourceEnt> getResourceList() {
         return resourceList;
     }
 
-    public void setResourceList(List<Resource> resourceList) {
+    public void setResourceList(List<ResourceEnt> resourceList) {
         this.resourceList = resourceList;
     }
 
-    public List<Client> getClientList() {
+    public List<ClientEnt> getClientList() {
         return clientList;
     }
 
-    public void setClientList(List<Client> clientList) {
+    public void setClientList(List<ClientEnt> clientList) {
         this.clientList = clientList;
     }
 
-    public Resource getResource() {
+    public ResourceEnt getResource() {
         return resource;
     }
 
-    public void setResource(Resource resource) {
+    public void setResource(ResourceEnt resource) {
         this.resource = resource;
     }
 
-    public Client getClient() {
+    public ClientEnt getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientEnt client) {
         this.client = client;
     }
 
@@ -103,15 +107,15 @@ public class AddRentalController implements Serializable {
     @Inject
     private UserService userService;
 
-    private List<Rental> rentalList;
+    private List<RentalEnt> rentalList;
 
-    private List<Resource> resourceList;
+    private List<ResourceEnt> resourceList;
 
-    private List<Client> clientList;
+    private List<ClientEnt> clientList;
 
-    private Resource resource;
+    private ResourceEnt resource;
 
-    private Client client;
+    private ClientEnt client;
 
     private Date startDate;
 
@@ -128,7 +132,7 @@ public class AddRentalController implements Serializable {
         dateIncorrect = false;
         if(endDate.after(startDate)){
             if(!rented) {
-                rentalService.addRental(new Rental(client, resource, startDate, endDate));
+                rentalService.addRental(new RentalEnt(client, resource, startDate, endDate));
                 loadRentals();
                 client = null;
                 resource = null;
@@ -146,7 +150,7 @@ public class AddRentalController implements Serializable {
 
     }
     public boolean checkIfRentable(){
-        for (Rental rental: rentalList) {
+        for (RentalEnt rental: rentalList) {
             if(rental.getResource().equals(resource)){
                 if(startDate.after(rental.getEndDate()) && endDate.after(rental.getEndDate())){
                     rented = false;
@@ -166,12 +170,12 @@ public class AddRentalController implements Serializable {
         rentalList = rentalService.getAllRentals();
     }
 
-    public List<Client> getActiveClient() {
+    public List<ClientEnt> getActiveClient() {
 
-        List<Client> clients = new ArrayList<>();
-        for (User user : userService.getAllUsers()) {
-            if ((user.getClass().equals(Client.class) && (user.isActive()) && (user.getUserName().equals(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName())))){
-                clients.add((Client) user);
+        List<ClientEnt> clients = new ArrayList<>();
+        for (UserEnt user : userService.getAllUsers()) {
+            if ((user.getClass().equals(ClientEnt.class) && (user.isActive()) && (user.getUserName().equals(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName())))){
+                clients.add((ClientEnt) user);
             }
         }
         return clients;

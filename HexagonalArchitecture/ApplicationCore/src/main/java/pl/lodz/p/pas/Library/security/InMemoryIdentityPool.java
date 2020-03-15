@@ -5,6 +5,10 @@ import pl.lodz.p.pas.Library.model.LibraryOwner;
 import pl.lodz.p.pas.Library.model.Manager;
 import pl.lodz.p.pas.Library.model.User;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.LibraryOwnerEnt;
+import pl.lodz.p.tks.model.ManagerEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -27,12 +31,12 @@ public class InMemoryIdentityPool implements IdentityStore {
     public CredentialValidationResult validate(Credential credential) {
 
         UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
-        User user = userService.getAccount(login.getCaller());
-        if (user !=null && login.getPasswordAsString().equals(user.getPassword()) && user instanceof LibraryOwner && user.isActive()) {
+        UserEnt user = userService.getAccount(login.getCaller());
+        if (user !=null && login.getPasswordAsString().equals(user.getPassword()) && user instanceof LibraryOwnerEnt && user.isActive()) {
             return new CredentialValidationResult(login.getCaller(), new HashSet<>(Arrays.asList("ADMIN")));
-        } else if (user !=null && login.getPasswordAsString().equals(user.getPassword()) && user instanceof Manager && user.isActive()) {
+        } else if (user !=null && login.getPasswordAsString().equals(user.getPassword()) && user instanceof ManagerEnt && user.isActive()) {
             return new CredentialValidationResult(login.getCaller(), new HashSet<>(Arrays.asList("MANAGER")));
-         }else if(user !=null && login.getPasswordAsString().equals(user.getPassword()) && user instanceof Client && user.isActive()){
+         }else if(user !=null && login.getPasswordAsString().equals(user.getPassword()) && user instanceof ClientEnt && user.isActive()){
             return new CredentialValidationResult(login.getCaller(), new HashSet<>(Arrays.asList("CLIENT")));
         }
         else {

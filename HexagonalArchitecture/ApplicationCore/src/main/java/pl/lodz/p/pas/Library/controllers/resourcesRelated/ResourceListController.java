@@ -2,6 +2,10 @@ package pl.lodz.p.pas.Library.controllers.resourcesRelated;
 
 import pl.lodz.p.pas.Library.model.*;
 import pl.lodz.p.pas.Library.services.ResourceService;
+import pl.lodz.p.tks.model.BookEnt;
+import pl.lodz.p.tks.model.CategoryEnt;
+import pl.lodz.p.tks.model.NewspaperEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -19,11 +23,11 @@ public class ResourceListController implements Serializable {
     @Inject
     private ResourceService resourceService;
 
-    private List<Resource> resourceList;
+    private List<ResourceEnt> resourceList;
 
     private String title;
 
-    private Category category;
+    private CategoryEnt category;
 
     private Integer releaseYear;
 
@@ -34,7 +38,7 @@ public class ResourceListController implements Serializable {
     private String productType;
     private String filterStr;
 
-    public List<Resource> getResourceList() {
+    public List<ResourceEnt> getResourceList() {
         return resourceList;
     }
 
@@ -54,11 +58,11 @@ public class ResourceListController implements Serializable {
         this.filterStr = filterStr;
     }
 
-    public Category getCategory() {
+    public CategoryEnt getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryEnt category) {
         this.category = category;
     }
 
@@ -106,11 +110,11 @@ public class ResourceListController implements Serializable {
     public void createNewProduct() {
         System.out.println(productType + ", " + title + ", " + category);
         if (productType.equals("Book")) {
-            resourceService.addResource(new Book(title, category, releaseYear, author));
+            resourceService.addResource(new BookEnt(title, category, releaseYear, author));
             loadProducts();
         }
         if (productType.equals("Newspaper")) {
-            resourceService.addResource(new Newspaper(title, category, issueNumber));
+            resourceService.addResource(new NewspaperEnt(title, category, issueNumber));
             loadProducts();
         }
 
@@ -121,7 +125,7 @@ public class ResourceListController implements Serializable {
         issueNumber = null;
     }
 
-    public void removeSelectedProduct(Resource resource) {
+    public void removeSelectedProduct(ResourceEnt resource) {
         resourceService.removeResource(resource);
         loadProducts();
     }

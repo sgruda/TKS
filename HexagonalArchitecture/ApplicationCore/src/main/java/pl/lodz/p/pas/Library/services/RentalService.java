@@ -1,9 +1,10 @@
 package pl.lodz.p.pas.Library.services;
 
-import pl.lodz.p.pas.Library.model.Client;
-import pl.lodz.p.pas.Library.model.Rental;
-import pl.lodz.p.pas.Library.model.User;
+
 import pl.lodz.p.pas.Library.repositories.RentalRepository;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.RentalEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -17,13 +18,13 @@ public class RentalService implements Serializable {
     @Inject
     private RentalRepository rentalRepo;
 
-    public List<Rental> getAllRentals() {
+    public List<RentalEnt> getAllRentals() {
         return rentalRepo.getAllRentals();
     }
 
-    public List<Rental> getUserRentals(String username){
-        ArrayList<Rental> temp = new ArrayList<>();
-        for (Rental rental: rentalRepo.getAllRentals()) {
+    public List<RentalEnt> getUserRentals(String username){
+        ArrayList<RentalEnt> temp = new ArrayList<>();
+        for (RentalEnt rental: rentalRepo.getAllRentals()) {
             if(rental.getClient().getUserName().equals(username)){
                 temp.add(rental);
             }
@@ -31,25 +32,25 @@ public class RentalService implements Serializable {
         return temp;
     }
 
-    public void addRental(Rental rental) {
+    public void addRental(RentalEnt rental) {
         rentalRepo.addRental(rental);
     }
 
-    public void removeRental(Rental rental) {
+    public void removeRental(RentalEnt rental) {
         rentalRepo.removeRental(rental);
     }
 
-    public void removeRentalsBasedOnClient(Client client) {
-        for (Rental rental: rentalRepo.getRentalsByClient(client)) {
+    public void removeRentalsBasedOnClient(ClientEnt client) {
+        for (RentalEnt rental: rentalRepo.getRentalsByClient(client)) {
             rentalRepo.removeRental(rental);
         }
     }
 
-    public List<Rental> getRentalsByClient(User user) {
+    public List<RentalEnt> getRentalsByClient(UserEnt user) {
         return rentalRepo.getRentalsByClient(user);
     }
 
-    public void getRental(Rental rental) {
+    public void getRental(RentalEnt rental) {
         rentalRepo.getRental(rental);
     }
 }

@@ -5,6 +5,8 @@ import pl.lodz.p.pas.Library.model.Client;
 import pl.lodz.p.pas.Library.model.PersonalData;
 import pl.lodz.p.pas.Library.model.User;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.PersonalDataEnt;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
@@ -142,7 +144,7 @@ public class RegisterController implements Serializable {
         checkIfAlreadyExists();
         if(isHuman){
         if((passwordDoesMatch) && (!doesExists)){
-            userService.addUser(new Client(new PersonalData(firstName,lastName,userName,password)));
+            userService.addUser(new ClientEnt(new PersonalDataEnt(firstName,lastName,userName,password)));
             System.out.println("User added");
             userCreated = true;
             userName = null;

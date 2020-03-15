@@ -1,4 +1,4 @@
-package model;
+package pl.lodz.p.tks.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
@@ -14,6 +14,26 @@ import java.io.Serializable;
 public abstract class ResourceEnt {
     public void setUUID(String UUID) {
         this.UUID = UUID;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public CategoryEnt getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEnt category) {
+        this.category = category;
     }
 
     private String UUID;

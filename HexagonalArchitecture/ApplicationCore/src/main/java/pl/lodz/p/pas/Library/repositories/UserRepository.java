@@ -1,6 +1,9 @@
 package pl.lodz.p.pas.Library.repositories;
 
-import pl.lodz.p.pas.Library.model.*;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.LibraryOwnerEnt;
+import pl.lodz.p.tks.model.ManagerEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package pl.lodz.p.pas.Library.services;
 
-import pl.lodz.p.pas.Library.model.User;
 import pl.lodz.p.pas.Library.repositories.RentalRepository;
 import pl.lodz.p.pas.Library.repositories.UserRepository;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -18,24 +18,24 @@ public class UserService implements Serializable {
     @Inject
     private RentalRepository rentalRepo;
 
-    public List<User> getAllUsers() {
+    public List<UserEnt> getAllUsers() {
         return userRepo.getAllUsers();
     }
 
-    public void addUser(User user) {
+    public void addUser(UserEnt user) {
         userRepo.addUser(user);
     }
 
-    public void activateUser(User user){
+    public void activateUser(UserEnt user){
         userRepo.getUser(user).setActive(true);
     }
 
-    public void deactivateUser(User user){
+    public void deactivateUser(UserEnt user){
         userRepo.getUser(user).setActive(false);
     }
 
-    public User getAccount(String username) {
-        for (User user: userRepo.getAllUsers()) {
+    public UserEnt getAccount(String username) {
+        for (UserEnt user: userRepo.getAllUsers()) {
             if(user.getUserName().equals(username)){
                 return user;
             }
@@ -44,7 +44,7 @@ public class UserService implements Serializable {
     }
 
     public boolean checkIfAlreadyExists(String username){
-        for (User user :userRepo.getAllUsers()) {
+        for (UserEnt user :userRepo.getAllUsers()) {
             if(user.getUserName().equals(username)){
                 return  true;
             }

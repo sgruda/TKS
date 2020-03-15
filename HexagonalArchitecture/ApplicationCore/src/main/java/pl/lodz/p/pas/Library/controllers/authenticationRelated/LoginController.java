@@ -1,12 +1,11 @@
 package pl.lodz.p.pas.Library.controllers.authenticationRelated;
 
-import pl.lodz.p.pas.Library.controllers.rentalsRelated.AddRentalController;
 import pl.lodz.p.pas.Library.controllers.usersRelated.UserListController;
-import pl.lodz.p.pas.Library.model.Client;
-import pl.lodz.p.pas.Library.model.LibraryOwner;
-import pl.lodz.p.pas.Library.model.Manager;
-import pl.lodz.p.pas.Library.model.User;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.LibraryOwnerEnt;
+import pl.lodz.p.tks.model.ManagerEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -89,12 +88,12 @@ public class LoginController implements Serializable {
                 Logger.getLogger(LoginController.class.getName()).log(Level.INFO, "Custom logger message : Login succeeded");
                 facesContext.addMessage(null,
                         new FacesMessage(FacesMessage.SEVERITY_INFO, "Login succeed", null));
-                User user = userService.getAccount(username);
-                if(user instanceof LibraryOwner){
+                UserEnt user = userService.getAccount(username);
+                if(user instanceof LibraryOwnerEnt){
                     userType = "admin";
-                }else if(user instanceof Manager){
+                }else if(user instanceof ManagerEnt){
                     userType = "manager";
-                } else if (user instanceof Client){
+                } else if (user instanceof ClientEnt){
                     userType = "client";
                 }
                 userListController.setUserType(userType);

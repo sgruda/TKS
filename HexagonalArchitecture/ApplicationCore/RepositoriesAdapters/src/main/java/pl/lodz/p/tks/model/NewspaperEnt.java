@@ -1,4 +1,4 @@
-package model;
+package pl.lodz.p.tks.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,14 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class NewspaperEnt extends ResourceEnt {
+    public Integer getIssueNumber() {
+        return issueNumber;
+    }
+
+    public void setIssueNumber(Integer issueNumber) {
+        this.issueNumber = issueNumber;
+    }
+
     private Integer issueNumber;
 
     public NewspaperEnt(String title, CategoryEnt category, Integer issueNumber) {

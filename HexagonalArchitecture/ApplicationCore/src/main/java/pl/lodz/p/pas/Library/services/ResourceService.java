@@ -5,6 +5,9 @@ import pl.lodz.p.pas.Library.model.Resource;
 import pl.lodz.p.pas.Library.model.Rental;
 import pl.lodz.p.pas.Library.repositories.ResourceRepository;
 import pl.lodz.p.pas.Library.repositories.RentalRepository;
+import pl.lodz.p.tks.model.RentalEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -19,16 +22,16 @@ public class ResourceService implements Serializable {
     @Inject
     private RentalRepository rentalRepository;
 
-    public List<Resource> getAllResources() {
+    public List<ResourceEnt> getAllResources() {
         return resourceRepository.getAllResources();
     }
 
-    public void addResource(Resource resource) {
+    public void addResource(ResourceEnt resource) {
         resourceRepository.addResource(resource);
     }
 
-    public void removeResource(Resource resource) {
-        for (Rental rental : rentalRepository.getAllRentals()) {
+    public void removeResource(ResourceEnt resource) {
+        for (RentalEnt rental : rentalRepository.getAllRentals()) {
             if (rental.getResource().equals(resource)) {
                 rental.setResource(null);
             }
@@ -40,17 +43,17 @@ public class ResourceService implements Serializable {
         resourceRepository.removeResource(resourceRepository.getResourceByTitle(title));
     }
 
-    public Resource getResource(Resource resource) {
+    public ResourceEnt getResource(ResourceEnt resource) {
       return  resourceRepository.getResource(resource);
     }
 
-    public Resource getResourceByTitle(String title) {
+    public ResourceEnt getResourceByTitle(String title) {
         return resourceRepository.getResourceByTitle(title);
     }
 
-    public void updateResource(Resource resource) {
-        Resource temp;
-        for (Resource res: resourceRepository.getAllResources()) {
+    public void updateResource(ResourceEnt resource) {
+        ResourceEnt temp;
+        for (ResourceEnt res: resourceRepository.getAllResources()) {
                 if(res.getUUID().equals(resource.getUUID())){
                     temp = res;
                     resourceRepository.removeResource(temp);
@@ -61,7 +64,7 @@ public class ResourceService implements Serializable {
 
     }
 
-    public List<Resource> getResourceContainsInTitle(String str) {
+    public List<ResourceEnt> getResourceContainsInTitle(String str) {
         return resourceRepository.getResourceContainsInTitle(str);
     }
 }

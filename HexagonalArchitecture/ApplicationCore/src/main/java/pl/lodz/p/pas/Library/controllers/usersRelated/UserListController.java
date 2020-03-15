@@ -2,6 +2,7 @@ package pl.lodz.p.pas.Library.controllers.usersRelated;
 
 import pl.lodz.p.pas.Library.model.*;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -16,7 +17,7 @@ public class UserListController implements Serializable {
     @Inject
     private UserService userService;
 
-    private List<User> userList;
+    private List<UserEnt> userList;
 
     private String userName;
 
@@ -26,7 +27,7 @@ public class UserListController implements Serializable {
 
     private String userType;
 
-    public List<User> getUserList() {
+    public List<UserEnt> getUserList() {
         return userList;
     }
 
@@ -62,11 +63,11 @@ public class UserListController implements Serializable {
         this.userType = userType;
     }
 
-    public void activateUser(User user) {
+    public void activateUser(UserEnt user) {
         userService.activateUser(user);
     }
 
-    public void deactivateUser(User user) {
+    public void deactivateUser(UserEnt user) {
         userService.deactivateUser(user);
     }
 

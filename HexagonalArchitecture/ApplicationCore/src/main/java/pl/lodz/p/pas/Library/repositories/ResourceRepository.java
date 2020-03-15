@@ -1,5 +1,10 @@
 package pl.lodz.p.pas.Library.repositories;
 
+import pl.lodz.p.tks.model.BookEnt;
+import pl.lodz.p.tks.model.CategoryEnt;
+import pl.lodz.p.tks.model.NewspaperEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
@@ -62,8 +67,8 @@ public class ResourceRepository {
     }
     @PostConstruct
     private void MockProductDb() {
-        addResource(new BookEnt("Lord Of The Rings", Category.Fantasy, 1954, "J.R.R. Tolkien"));
-        addResource(new BookEnt("The Brothers Karamazov", Category.Philosophical, 1879, "Fyodor Dostoevsky"));
-        addResource(new NewspaperEnt("CKM", Category.Lifestyle, 4));
+        addResource(new BookEnt("Lord Of The Rings", CategoryEnt.Fantasy, 1954, "J.R.R. Tolkien"));
+        addResource(new BookEnt("The Brothers Karamazov", CategoryEnt.Philosophical, 1879, "Fyodor Dostoevsky"));
+        addResource(new NewspaperEnt("CKM", CategoryEnt.Lifestyle, 4));
     }
 }

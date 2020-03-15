@@ -5,6 +5,10 @@ import pl.lodz.p.pas.Library.model.LibraryOwner;
 import pl.lodz.p.pas.Library.model.Manager;
 import pl.lodz.p.pas.Library.model.PersonalData;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.LibraryOwnerEnt;
+import pl.lodz.p.tks.model.ManagerEnt;
+import pl.lodz.p.tks.model.PersonalDataEnt;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -60,12 +64,12 @@ public class AddUserController implements Serializable {
             start();
         switch (userType) {
             case "Admin":
-                userService.addUser(new LibraryOwner(new PersonalData(firstName, lastName, userName,password)));
+                userService.addUser(new LibraryOwnerEnt(new PersonalDataEnt(firstName, lastName, userName,password)));
                 break;
             case "Worker":
-                userService.addUser(new Manager(new PersonalData(firstName, lastName, userName,password)));
+                userService.addUser(new ManagerEnt(new PersonalDataEnt(firstName, lastName, userName,password)));
             case "Reader":
-                userService.addUser(new Client(new PersonalData(firstName, lastName, userName,password)));
+                userService.addUser(new ClientEnt(new PersonalDataEnt(firstName, lastName, userName,password)));
             default:
                 System.out.println("Wrong user type!");
                 break;

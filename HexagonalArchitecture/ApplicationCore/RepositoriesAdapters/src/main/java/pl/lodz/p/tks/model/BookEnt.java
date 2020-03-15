@@ -1,4 +1,4 @@
-package model;
+package pl.lodz.p.tks.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,23 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class BookEnt extends ResourceEnt{
     private Integer releaseYear;
+
+    public Integer getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     private String author;
 
     public BookEnt(String title, CategoryEnt category, Integer releaseYear, String author) {

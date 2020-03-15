@@ -4,6 +4,10 @@ import pl.lodz.p.pas.Library.model.*;
 import pl.lodz.p.pas.Library.services.ResourceService;
 import pl.lodz.p.pas.Library.services.RentalService;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.RentalEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -24,15 +28,15 @@ public class RentalListController implements Serializable {
     @Inject
     private UserService userService;
 
-    private List<Rental> rentalList;
+    private List<RentalEnt> rentalList;
 
-    private List<Resource> resourceList;
+    private List<ResourceEnt> resourceList;
 
-    private List<Client> clientList;
+    private List<ClientEnt> clientList;
 
-    private Resource resource;
+    private ResourceEnt resource;
 
-    private Client client;
+    private ClientEnt client;
 
     private Date startDate;
 
@@ -67,31 +71,31 @@ public class RentalListController implements Serializable {
     private Date endDate;
 
 
-    public List<Rental> getRentalList() {
+    public List<RentalEnt> getRentalList() {
         return rentalList;
     }
 
-    public List<Client> getClientList() {
+    public List<ClientEnt> getClientList() {
         return clientList;
     }
 
-    public List<Resource> getResourceList() {
+    public List<ResourceEnt> getResourceList() {
         return resourceList;
     }
 
-    public Resource getResource() {
+    public ResourceEnt getResource() {
         return resource;
     }
 
-    public void setResource(Resource resource) {
+    public void setResource(ResourceEnt resource) {
         this.resource = resource;
     }
 
-    public User getClient() {
+    public UserEnt getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientEnt client) {
         this.client = client;
     }
 
@@ -103,11 +107,11 @@ public class RentalListController implements Serializable {
         this.startDate = startDate;
     }
 
-    public Client getClientById(String uuid) {
+    public ClientEnt getClientById(String uuid) {
         if (uuid == null) {
             throw new IllegalArgumentException("No id provided");
         }
-        for (Client client : clientList) {
+        for (ClientEnt client : clientList) {
             if (uuid.equals(client.getUUID())) {
                 return client;
             }
@@ -115,11 +119,11 @@ public class RentalListController implements Serializable {
         return null;
     }
 
-    public Resource getProductById(String uuid) {
+    public ResourceEnt getProductById(String uuid) {
         if (uuid == null) {
             throw new IllegalArgumentException("No id provided");
         }
-        for (Resource resource : resourceList) {
+        for (ResourceEnt resource : resourceList) {
             if (uuid.equals(resource.getUUID())) {
                 return resource;
             }
@@ -128,7 +132,7 @@ public class RentalListController implements Serializable {
     }
 
     public boolean checkIfRentable(){
-        for (Rental rental: rentalList) {
+        for (RentalEnt rental: rentalList) {
             if(rental.getResource().equals(resource)){
                 if(startDate.after(rental.getEndDate())){
                     return true;
@@ -141,28 +145,28 @@ public class RentalListController implements Serializable {
         return true;
     }
 
-    public void removeSelectedRental(Rental rental) {
+    public void removeSelectedRental(RentalEnt rental) {
         rentalService.removeRental(rental);
         loadData();
     }
 
 
 
-    public List<Client> getActiveClients() {
-        List<Client> clients = new ArrayList<>();
-        for (User user : userService.getAllUsers()) {
-            if ((user.getClass().equals(Client.class) && (user.isActive()))){
-                clients.add((Client) user);
+    public List<ClientEnt> getActiveClients() {
+        List<ClientEnt> clients = new ArrayList<>();
+        for (UserEnt user : userService.getAllUsers()) {
+            if ((user.getClass().equals(ClientEnt.class) && (user.isActive()))){
+                clients.add((ClientEnt) user);
             }
         }
         return clients;
     }
 
-    public List<Client> filterClients() {
-        List<Client> clients = new ArrayList<>();
-        for (User user : userService.getAllUsers()) {
+    public List<ClientEnt> filterClients() {
+        List<ClientEnt> clients = new ArrayList<>();
+        for (UserEnt user : userService.getAllUsers()) {
             if (user.getClass().equals(Client.class)) {
-                clients.add((Client) user);
+                clients.add((ClientEnt) user);
             }
         }
         return clients;

@@ -1,5 +1,8 @@
 package pl.lodz.p.pas.Library.repositories;
 
+import pl.lodz.p.tks.model.RentalEnt;
+import pl.lodz.p.tks.model.UserEnt;
+
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +39,9 @@ public class RentalRepository {
     }
 
     public List<RentalEnt> getRentalsByClient(UserEnt user) {
-        List<Rental> rentals = new ArrayList<>();
+        List<RentalEnt> rentals = new ArrayList<>();
         try {
-            for (Rental rental : rentalList) {
+            for (RentalEnt rental : rentalList) {
                 if (rental.getClient().equals(user)) {
                    rentals.add(rental);
                 }

@@ -5,6 +5,9 @@ import pl.lodz.p.pas.Library.model.Book;
 import pl.lodz.p.pas.Library.model.Newspaper;
 import pl.lodz.p.pas.Library.model.Resource;
 import pl.lodz.p.pas.Library.services.ResourceService;
+import pl.lodz.p.tks.model.BookEnt;
+import pl.lodz.p.tks.model.NewspaperEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
@@ -37,14 +40,14 @@ public class ResourceAPI {
     @POST
     @Path("add_book")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void Create(Book book) {
+    public void Create(BookEnt book) {
         resourceService.addResource(book);
     }
 
     @POST
     @Path("add_newspaper")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void Create(Newspaper newspaper) {
+    public void Create(NewspaperEnt newspaper) {
         resourceService.addResource(newspaper);
     }
 
@@ -52,24 +55,24 @@ public class ResourceAPI {
     @GET
     @Path("{name}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Resource Get(@PathParam("name") String name) {
+    public ResourceEnt Get(@PathParam("name") String name) {
 
         return resourceService.getResourceByTitle(convertString(name));
     }
 
     @GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Resource> GetAll() {
+    public List<ResourceEnt> GetAll() {
         return resourceService.getAllResources();
     }
 
     @GET
     @Path("books")
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Resource> GetAllBooks() {
-        List<Resource> temp = new ArrayList<>();
-        for (Resource res: resourceService.getAllResources()) {
-                if(res instanceof Book){
+    public List<ResourceEnt> GetAllBooks() {
+        List<ResourceEnt> temp = new ArrayList<>();
+        for (ResourceEnt res: resourceService.getAllResources()) {
+                if(res instanceof BookEnt){
                     temp.add(res);
                 }
         }
@@ -79,10 +82,10 @@ public class ResourceAPI {
     @GET
     @Path("newspapers")
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public List<Resource> GetAllNewspapers() {
-        List<Resource> temp = new ArrayList<>();
-        for (Resource res: resourceService.getAllResources()) {
-            if(res instanceof Newspaper){
+    public List<ResourceEnt> GetAllNewspapers() {
+        List<ResourceEnt> temp = new ArrayList<>();
+        for (ResourceEnt res: resourceService.getAllResources()) {
+            if(res instanceof NewspaperEnt){
                 temp.add(res);
             }
         }
@@ -101,14 +104,14 @@ public class ResourceAPI {
     @POST
     @Path("modify_book")
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public void Update(Book resource){
+    public void Update(BookEnt resource){
         resourceService.updateResource(resource);
     }
 
     @POST
     @Path("modify_newspaper")
     @Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-    public void Update(Newspaper resource){
+    public void Update(NewspaperEnt resource){
         resourceService.updateResource(resource);
     }
 

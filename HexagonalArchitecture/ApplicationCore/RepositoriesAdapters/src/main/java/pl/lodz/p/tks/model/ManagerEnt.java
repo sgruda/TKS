@@ -1,4 +1,4 @@
-package model;
+package pl.lodz.p.tks.model;
 
 import lombok.NoArgsConstructor;
 

@@ -8,6 +8,10 @@ import pl.lodz.p.pas.Library.security.InMemoryIdentityPool;
 import pl.lodz.p.pas.Library.services.RentalService;
 import pl.lodz.p.pas.Library.services.ResourceService;
 import pl.lodz.p.pas.Library.services.UserService;
+import pl.lodz.p.tks.model.ClientEnt;
+import pl.lodz.p.tks.model.RentalEnt;
+import pl.lodz.p.tks.model.ResourceEnt;
+import pl.lodz.p.tks.model.UserEnt;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -26,35 +30,35 @@ public class UserRentalListController implements Serializable {
     @Inject
     private RentalService rentalService;
 
-    private List<Rental> rentalList;
+    private List<RentalEnt> rentalList;
 
-    private Resource resource;
+    private ResourceEnt resource;
 
-    private Client client;
+    private ClientEnt client;
 
-    public List<Rental> getRentalList() {
+    public List<RentalEnt> getRentalList() {
         return rentalList;
     }
 
-    public Resource getResource() {
+    public ResourceEnt getResource() {
         return resource;
     }
 
-    public void setResource(Resource resource) {
+    public void setResource(ResourceEnt resource) {
         this.resource = resource;
     }
 
-    public User getClient() {
+    public UserEnt getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientEnt client) {
         this.client = client;
     }
 
 
 
-    public void removeSelectedRental(Rental rental) {
+    public void removeSelectedRental(RentalEnt rental) {
         rentalService.removeRental(rental);
         loadData();
     }

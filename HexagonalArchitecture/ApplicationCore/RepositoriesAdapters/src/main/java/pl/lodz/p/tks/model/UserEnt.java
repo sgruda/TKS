@@ -1,4 +1,4 @@
-package model;
+package pl.lodz.p.tks.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +8,30 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class UserEnt {
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public PersonalDataEnt getPersonalData() {
+        return personalData;
+    }
+
+    public void setPersonalData(PersonalDataEnt personalData) {
+        this.personalData = personalData;
+    }
+
     private String UUID;
     private boolean isActive;
     private PersonalDataEnt personalData;
@@ -34,5 +58,11 @@ public abstract class UserEnt {
         this.UUID = java.util.UUID.randomUUID().toString();
         this.isActive = true;
         this.personalData = new PersonalDataEnt(firstName, lastName);
+    }
+    public String getUserName(){
+        return this.personalData.getUserName();
+    }
+    public String getPassword(){
+        return this.personalData.getPassword();
     }
 }
