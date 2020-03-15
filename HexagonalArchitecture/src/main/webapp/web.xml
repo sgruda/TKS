@@ -7,7 +7,7 @@
     </context-param>
     <context-param>
         <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>/WEB-INF/payara-web.xml</param-value>
+        <param-value>/src/main/webapp/WEB-INF/payara-web.xml</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
