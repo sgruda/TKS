@@ -31,3 +31,9 @@ HexagonalArchitecture/.idea/libraries/
 HexagonalArchitecture/.idea/
 
 *.iml
+
+HexagonalArchitecture/ApplicationPorts/target/maven-archiver/
+
+HexagonalArchitecture/RepositoriesAdapters/target/
+
+HexagonalArchitecture/ApplicationCore/target/
