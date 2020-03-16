@@ -6,13 +6,10 @@
 
     <parent>
         <groupId>pl.lodz.p.it</groupId>
-        <artifactId>ApplicationCore</artifactId>
+        <artifactId>HexagonalArchitecture</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>pl.lodz.p.it</groupId>
     <artifactId>ApplicationPorts</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    
 </project>

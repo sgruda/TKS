@@ -11,10 +11,6 @@
 
     <artifactId>ApplicationCore</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>RepositoriesAdapters</module>
-        <module>ApplicationPorts</module>
-    </modules>
     <dependencies>
         <dependency>
             <groupId>pl.lodz.p.it</groupId>
@@ -23,6 +19,4 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
-
 </project>

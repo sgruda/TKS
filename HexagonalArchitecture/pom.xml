@@ -10,15 +10,19 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>ApplicationCore</module>
+        <module>ApplicationPorts</module>
+        <module>RepositoriesAdapters</module>
     </modules>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <jakartaee>8.0</jakartaee>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <jakartaee>8.0.1</jakartaee>
     </properties>
+
     <repositories>
         <repository>
             <id>captcha</id>
@@ -41,12 +45,6 @@
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>7.0</version>
-        </dependency>
-        <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.12</version>
-                <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -118,7 +116,7 @@
                                         <groupId>javax</groupId>
                                         <artifactId>javaee-api</artifactId>
                                         <version>${jakartaee}</version>
-                                        <type>jar</type>
+                                        <type>war</type>
                                     </artifactItem>
                                 </artifactItems>
                             </configuration>
