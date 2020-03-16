@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>User list</title>
+</h:head>
+<h:body>
+    <h:form>
+        <p:dataTable value="#{userListController.userList}" var="user">
+            <p:column headerText="Username">
+                <h:outputText value="#{user.userName}"/>
+            </p:column>
+            <p:column>
+                <h:commandButton value="Details" action="#{detailsUserController.onClick(user)}"/>
+            </p:column>
+            <p:column headerText="Active">
+                <h:outputText value="#{user.active}"/>
+            </p:column>
+            <p:column>
+                <h:commandButton rendered="#{!user.active}" value="Activate"
+                                 action="#{userListController.activateUser(user)}"/>
+            </p:column>
+            <p:column>
+                <h:commandButton rendered="#{user.active}" value="Deactivate"
+                                 action="#{userListController.deactivateUser(user)}"/>
+            </p:column>
+            <p:column>
+                <h:commandButton value="Modify" action="#{modifyUserController.onClick(user)}"/>
+            </p:column>
+        </p:dataTable>
+        <h:commandButton value="Refresh" action="#{userListController.loadUsers()}"/>
+        <h:commandButton value="Add a user" action="#{addUserController.onClick()}"/>
+        <h:button value="Back" outcome="adminHomePage.xhtml"/>
+    </h:form>
+</h:body>
+</html>
+

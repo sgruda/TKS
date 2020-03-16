@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:botDetect="https://captcha.com/java/jsf">
+
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>Register Client</title>
+</h:head>
+
+<h:body>
+    <h:form id="registerForm">
+        <p:panel id="registerPnl" header="Register"
+                 style="width: 600px; margin: 0 auto; float: center;">
+            <h:panelGrid id="registerPanel" columns="2" cellpadding="5">
+                <h:outputText value="Username" />
+                <p:inputText id="username" value="#{registerController.userName}" required="true"></p:inputText>
+                <p:spacer /><p:spacer />
+                <h:outputText value="Account with given username already exists!" rendered="#{registerController.doesExists}" style="color:red" />
+                <p:spacer /><p:spacer />
+                <h:outputText value="First Name" />
+                <p:inputText id="firstname" value="#{registerController.firstName}" required="true"></p:inputText>
+                <p:spacer /><p:spacer />
+                <h:outputText value="Last Name" />
+                <p:inputText id="lastname" value="#{registerController.lastName}" required="true"></p:inputText>
+                <p:spacer /><p:spacer />
+                <h:outputText value="Password" />
+                <p:password id="password" value="#{registerController.password}"
+                            feedback="false" required="true"></p:password>
+                <p:message for="password"></p:message>
+                <p:spacer></p:spacer>
+                <h:outputText value="Confirm password"/>
+                <p:password id="password_2" value="#{registerController.confirmPassword}"
+                            feedback="false" required="true"></p:password>
+                <p:message for="password_2"></p:message>
+                <p:spacer /><p:spacer />
+                <h:outputText value="Passwords do not match" rendered="#{!registerController.passwordDoesMatch}" style="color:red" />
+                <botDetect:jsfCaptcha id="jsfPrimefacesSignupFormCaptcha"
+                                      userInputID="signup_captchaCode"
+                                      imageWidth="180"
+                                      imageHeight="50"
+                                      binding="#{registerController.captcha}"/>
+
+                <p:inputText id="signup_captchaCode" label="captchaCode"
+                             value="#{registerController.captchaCode}"/>
+            </h:panelGrid>
+            <h:panelGrid columns="2" cellpadding="5" >
+                <p:commandButton id="registerButton" action="#{registerController.createNewClient()}"
+                                 value="Register" update="registerForm"  style="float: center;">
+                </p:commandButton>
+                <p:button id="mainPage" outcome="index.xhtml"
+                                 value="Return to login page"   style="float: right;">
+                </p:button>
+                <p:spacer /><p:spacer />
+                <h:outputText value="Account created ! Now admin has to activate your account. Be patient!" rendered="#{registerController.userCreated}" />
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
